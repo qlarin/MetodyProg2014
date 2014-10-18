@@ -1,6 +1,6 @@
 package metody;
 
-public class Contact {
+public class Contact extends Unit {
 
 	
 	private String email;

@@ -1,11 +1,19 @@
 package metody;
 
-public class User {
+import java.util.*;
+
+public class User extends Unit {
 
 	
 	private String login;
 	private String password;
 	private Employee employee;
+	
+	private List<Task> tasks;
+	public User()
+	{
+		tasks = new ArrayList<Task>();
+	}
 	
 	public String getLogin() {
 		return login;
@@ -24,6 +32,14 @@ public class User {
 	}
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 	
 	

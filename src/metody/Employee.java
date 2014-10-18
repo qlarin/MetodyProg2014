@@ -3,7 +3,7 @@ package metody;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Employee {
+public class Employee extends Unit {
 
 	public Employee() {
 			super();
