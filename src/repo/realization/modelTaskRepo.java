@@ -11,6 +11,8 @@ public class modelTaskRepo implements IRepo<Task> {
 	modelDatabase database;
 	
 	public modelTaskRepo(modelDatabase database){
+		super();
+		this.database = database;
 		
 	}
 	
