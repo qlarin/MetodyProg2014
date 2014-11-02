@@ -1,7 +1,6 @@
 package metody;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Employee extends Unit {
 
@@ -39,6 +38,8 @@ public class Employee extends Unit {
 		return user;
 	}
 	public void setUser(User user) {
+		if(!this.equals(user.getEmployee()))
+			user.setEmployee(this);
 		this.user = user;
 	}
 	public List<Contact> getContacts() {

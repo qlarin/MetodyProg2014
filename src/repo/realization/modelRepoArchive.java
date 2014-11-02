@@ -2,6 +2,7 @@ package repo.realization;
 
 import java.util.*;
 import metody.Employee;
+import metody.Task;
 import repo.IRepo;
 import repo.IRepoArchive;
 import repo.IUserRepo;
@@ -13,16 +14,20 @@ public class modelRepoArchive implements IRepoArchive {
 
 	@Override
 	public IUserRepo getUsers() {
-		// TODO Auto-generated method stub
+		
 		return new modelUserRepo(database);
 	}
 
 	@Override
 	public IRepo<Employee> getEmployees() {
-		// TODO Auto-generated method stub
+		
 		return new modelEmployeeRepo(database);
 	}
 	
+	public IRepo<Task> getTasks() {
+		
+		return new modelTaskRepo(database);
+	}
 	
 	
 }

@@ -32,6 +32,8 @@ public class User extends Unit {
 	}
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+		if(!this.equals(employee.getUser()))
+			employee.setUser(this);
 	}
 
 	public List<Task> getTasks() {

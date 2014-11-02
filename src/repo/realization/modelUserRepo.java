@@ -4,7 +4,6 @@ import java.util.*;
 
 import metody.Task;
 import metody.User;
-import metody.Unit;
 import repo.IUserRepo;
 
 public class modelUserRepo implements IUserRepo {
@@ -59,18 +58,18 @@ public class modelUserRepo implements IUserRepo {
 	@Override
 	public List<User> withTask(String taskName) {
 		// TODO Auto-generated method stub
-		for(Task r:database.tasks)
-			if(r.getName().equals(taskName))
-			return r.getUsers();
+		for(Task t:database.tasks)
+			if(t.getName().equals(taskName))
+			return t.getUsers();
 			return new ArrayList<User>();
 	}
 
 	@Override
 	public List<User> withTask(int taskNumber) {
 		// TODO Auto-generated method stub
-		for(Task r:database.tasks)
-			if(r.getNumber()==taskNumber)
-			return r.getUsers();
+		for(Task t:database.tasks)
+			if(t.getNumber()==taskNumber)
+			return t.getUsers();
 			return new ArrayList<User>();
 	}
 	

@@ -6,5 +6,6 @@ public interface IRepoArchive {
 
 	public IUserRepo getUsers();
 	public IRepo<Employee> getEmployees();
+	public IRepo<Task> getTasks();
 	
 }

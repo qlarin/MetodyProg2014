@@ -10,7 +10,6 @@ public class modelEmployeeRepo implements IRepo<Employee> {
 	private modelDatabase database;
 
 	public modelEmployeeRepo(modelDatabase database) {
-		super();
 		this.database = database;
 	}
 
