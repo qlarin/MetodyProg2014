@@ -12,13 +12,12 @@ public class modelRepoArchive implements IRepoArchive {
 
 	private modelDatabase database = new modelDatabase();
 
-	@Override
 	public IUserRepo getUsers() {
 		
 		return new modelUserRepo(database);
 	}
 
-	@Override
+	
 	public IRepo<Employee> getEmployees() {
 		
 		return new modelEmployeeRepo(database);

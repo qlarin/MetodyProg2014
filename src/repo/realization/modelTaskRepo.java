@@ -17,26 +17,22 @@ public class modelTaskRepo implements IRepo<Task> {
 	}
 	
 	
-	@Override
 	public void save(Task unit) {
 		
 		database.tasks.add(unit);
 	}
 
-	@Override
 	public void delete(Task unit) {
 		
 		database.tasks.remove(unit);
 	}
 
-	@Override
 	public void update(Task unit) {
 		
 		
 	}
 
 
-	@Override
 	public List<Task> getAll() {
 		
 		return database.tasks;
