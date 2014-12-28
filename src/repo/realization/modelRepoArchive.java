@@ -2,6 +2,7 @@ package repo.realization;
 
 
 import metody.Employee;
+import metody.Contact;
 import metody.Task;
 import repo.IRepo;
 import repo.IRepoArchive;
@@ -22,6 +23,12 @@ public class modelRepoArchive implements IRepoArchive {
 		
 		return new modelEmployeeRepo(database);
 	}
+	
+	public IRepo<Contact> getContacts() {
+		
+		return new modelContactRepo(database);
+	}
+	
 	
 	public IRepo<Task> getTasks() {
 		

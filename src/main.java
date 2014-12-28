@@ -51,7 +51,7 @@ public class main {
 					+ "companyName varchar(30), roomNumber varchar(3), specialization varchar(20))";
 			Statement createTable = connection.createStatement();
 			createTable.executeUpdate(createTableSql);
-		*/	
+			*/
 			IRepoArchive archive = new RepoArchive(connection, uow);
 			archive.getUsers().save(jnowak);
 			
@@ -62,7 +62,7 @@ public class main {
 					System.out.println(userInDB.getNumber() + " "
 			+ userInDB.getLogin() + " " + userInDB.getPassword());
 			
-			User u = archive.getUsers().get(2);
+			User u = archive.getUsers().get(3);
 			u.setPassword("testowe123");
 			archive.getUsers().update(u);
 			archive.getUsers().delete(usersInDb.get(0));
@@ -76,7 +76,6 @@ public class main {
 	
 		}
 		
-	
 	
 	System.out.println("koniec bazy");
 	}

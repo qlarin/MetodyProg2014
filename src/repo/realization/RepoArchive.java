@@ -3,6 +3,7 @@ package repo.realization;
 import java.sql.Connection;
 
 import metody.Employee;
+import metody.Contact;
 import metody.Task;
 import repo.IRepo;
 import repo.IRepoArchive;
@@ -27,6 +28,9 @@ public class RepoArchive implements IRepoArchive {
 	}
 	public IRepo<Employee> getEmployees() {
 		return new EmployeeRepo(connection, new EmployeeBuilder(), uow);
+	}
+	public IRepo<Contact> getContacts() {
+		return new ContactRepo(connection, new ContactBuilder(), uow);
 	}
 	public IRepo<Task> getTasks(){
 		return null;
