@@ -8,11 +8,12 @@ import java.util.*;
 
 import metody.Contact;
 import repo.IRepo;
+import unitofwork.IUnitOfWork;
 
 public class ContactRepo extends Repo<Contact>{
 
-	public ContactRepo(Connection connection, IUnitBuilder<Contact> builder) {
-		super(connection, builder);
+	protected ContactRepo(Connection connection, IUnitBuilder<Contact> builder, IUnitOfWork uow) {
+		super(connection, builder, uow);
 	}
 	
 	protected void setupUpdateQuery(Contact unit) throws SQLException {

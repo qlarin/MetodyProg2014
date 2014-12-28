@@ -8,11 +8,12 @@ import java.util.*;
 
 import metody.Employee;
 import repo.IRepo;
+import unitofwork.IUnitOfWork;
 
 public class EmployeeRepo extends Repo<Employee>{
 
-	public EmployeeRepo(Connection connection, IUnitBuilder<Employee> builder) {
-		super(connection, builder);
+	protected EmployeeRepo(Connection connection, IUnitBuilder<Employee> builder, IUnitOfWork uow) {
+		super(connection, builder, uow);
 	}
 	
 	protected void setupUpdateQuery(Employee unit) throws SQLException {

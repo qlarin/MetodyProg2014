@@ -7,8 +7,11 @@ import repo.IRepo;
 import repo.realization.EmployeeBuilder;
 import repo.realization.EmployeeRepo;
 import repo.realization.modelRepoArchive;
+import repo.realization.RepoArchive;
 import repo.realization.UserRepo;
 import repo.realization.UserBuilder;
+import unitofwork.IUnitOfWork;
+import unitofwork.UnitOfWork;
 
 
 public class main {
@@ -33,6 +36,8 @@ public class main {
 		
 		try{
 			Connection connection = DriverManager.getConnection(url, "root", "metody16");
+			IUnitOfWork uow = new UnitOfWork(connection);
+			
 			/*
 			String createTableSql = "CREATE TABLE users(id int NOT NULL AUTO_INCREMENT PRIMARY KEY," 
 			+ " login VARCHAR(20), password VARCHAR(20))";
@@ -47,34 +52,25 @@ public class main {
 			Statement createTable = connection.createStatement();
 			createTable.executeUpdate(createTableSql);
 		*/	
-		//	IRepo<User> users = new UserRepo(connection, new UserBuilder());
-		//	users.save(jnowak);
-			IRepo<Employee> employees = new EmployeeRepo(connection, new EmployeeBuilder());
-		//	employees.save(nowak_emp);
+			IRepoArchive archive = new RepoArchive(connection, uow);
+			archive.getUsers().save(jnowak);
 			
-			for(Employee employeeInDB: employees.getAll()){
-				System.out.println(employeeInDB.getFirstName() + " " + employeeInDB.getLastName());
-			}
-		//	List<User> usersInDB= users.getAll();
+			List<User> usersInDb = archive.getUsers().getAll();
 			
-		/*	for(User userInDB: usersInDB)
+			
+			for(User userInDB: usersInDb)
 					System.out.println(userInDB.getNumber() + " "
 			+ userInDB.getLogin() + " " + userInDB.getPassword());
-		*/	
-		
-		/*	users.delete(usersInDB.get(0));
-		
-			User u = users.get(5);
-			u.setPassword("test");
-			users.update(users.get(5));
-		
 			
+			User u = archive.getUsers().get(2);
+			u.setPassword("testowe123");
+			archive.getUsers().update(u);
+			archive.getUsers().delete(usersInDb.get(0));
 			
-			for(User userInDB: users.getAll())
+			for(User userInDB: archive.getUsers().getAll())
 				System.out.println(userInDB.getNumber() + " "
 						+ userInDB.getLogin() + " " + userInDB.getPassword());
-						
-			*/			
+			
 		}catch (SQLException e){
 			e.printStackTrace();
 	

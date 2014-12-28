@@ -7,12 +7,15 @@ import java.sql.SQLException;
 import java.util.*;
 
 import repo.IRepo;
+import unitofwork.IUnitOfWork;
+import unitofwork.IUnitOfWorkRepo;
 import metody.Unit;
 
 
 
-public abstract class Repo<TUnit extends Unit> implements IRepo<TUnit> {
+public abstract class Repo<TUnit extends Unit> implements IRepo<TUnit>, IUnitOfWorkRepo {
 
+	protected IUnitOfWork uow;
 	protected Connection connection;
 	protected PreparedStatement selectByID;
 	protected PreparedStatement insert;
@@ -24,15 +27,11 @@ public abstract class Repo<TUnit extends Unit> implements IRepo<TUnit> {
 	protected String selectByIDSql= "select * from getTableName() where id=?";
 	protected String deleteSql= "delete from getTableName() where id=?";
 	protected String selectAllSql= "select * from getTableName()";
+
 	
-	protected abstract void setupUpdateQuery(TUnit unit) throws SQLException;
-	protected abstract void setupInsertQuery(TUnit unit) throws SQLException;
-	protected abstract String getTableName();
-	protected abstract String getUpdateQuery();
-	protected abstract String getInsertQuery();
-	
-	protected Repo(Connection connection, IUnitBuilder<TUnit> builder)
+	protected Repo(Connection connection, IUnitBuilder<TUnit> builder, IUnitOfWork uow)
 	{
+		this.uow = uow;
 		this.builder = builder;
 		this.connection = connection;
 		try {
@@ -48,34 +47,53 @@ public abstract class Repo<TUnit extends Unit> implements IRepo<TUnit> {
 	
 	public void save(TUnit unit) {
 		
-		try {
-			 setupInsertQuery(unit);
-			 insert.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		uow.markAsNew(unit, this);
 	}
 	
 public void update(TUnit unit) {
 		
-		try {
-			 setupUpdateQuery(unit);
-			 update.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		uow.markAsDirty(unit, this);
 	}
 	
 public void delete(TUnit unit) {
 	
-	try {
-		 delete.setInt(1, unit.getNumber());
-		 delete.executeUpdate();
+	uow.markAsDeleted(unit, this);
+}
+
+public void persistAdd(Unit unit) {
+	
+	try{
+		setupInsertQuery((TUnit)unit);
+		insert.executeUpdate();
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
+	
+}
+
+
+public void persistUpdate(Unit unit) {
+	
+	try{
+		setupUpdateQuery((TUnit)unit);
+		update.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
 }
 	
+public void persistDelete(Unit unit) {
+	
+	try{
+		delete.setInt(1,  unit.getNumber());
+		delete.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+}
+
 public TUnit get(int id) {
 	
 	try {
@@ -106,6 +124,12 @@ public TUnit get(int id) {
 		return result;
 	}
 
+	
+	protected abstract void setupUpdateQuery(TUnit unit) throws SQLException;
+	protected abstract void setupInsertQuery(TUnit unit) throws SQLException;
+	protected abstract String getTableName();
+	protected abstract String getUpdateQuery();
+	protected abstract String getInsertQuery();	
 
 
 }
