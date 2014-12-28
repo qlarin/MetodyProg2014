@@ -2,16 +2,8 @@ import java.sql.*;
 import java.util.*;
 
 import metody.*;
-import repo.IRepoArchive;
-import repo.IRepo;
-import repo.realization.EmployeeBuilder;
-import repo.realization.EmployeeRepo;
-import repo.realization.ContactBuilder;
-import repo.realization.ContactRepo;
-import repo.realization.modelRepoArchive;
-import repo.realization.RepoArchive;
-import repo.realization.UserRepo;
-import repo.realization.UserBuilder;
+import repo.*;
+import repo.realization.*;
 import unitofwork.IUnitOfWork;
 import unitofwork.UnitOfWork;
 
@@ -54,24 +46,27 @@ public class Main {
 			Statement createTable = connection.createStatement();
 			createTable.executeUpdate(createTableSql);
 			*/
-			IRepoArchive archive = new RepoArchive(connection, uow);
+
+		/*	
 			archive.getUsers().save(jnowak);
 			
-			List<User> usersInDb = archive.getUsers().getAll();
+			List<User> usersInDB = archive.getUsers().getAll();
 			
 			
-			for(User userInDB: usersInDb)
+			for(User userInDB: usersInDB)
 					System.out.println(userInDB.getNumber() + " "
 			+ userInDB.getLogin() + " " + userInDB.getPassword());
 			
 			User u = archive.getUsers().get(2);
 			u.setPassword("testowe123");
 			archive.getUsers().update(u);
-			archive.getUsers().delete(usersInDb.get(0));
+			archive.getUsers().delete(usersInDB.get(0));
 			
 			for(User userInDB: archive.getUsers().getAll())
 				System.out.println(userInDB.getNumber() + " "
 						+ userInDB.getLogin() + " " + userInDB.getPassword());
+						
+		*/
 			
 		}catch (SQLException e){
 			e.printStackTrace();
