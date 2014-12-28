@@ -50,17 +50,17 @@ public abstract class Repo<TUnit extends Unit> implements IRepo<TUnit>, IUnitOfW
 		uow.markAsNew(unit, this);
 	}
 	
-public void update(TUnit unit) {
+	public void update(TUnit unit) {
 		
 		uow.markAsDirty(unit, this);
 	}
 	
-public void delete(TUnit unit) {
+	public void delete(TUnit unit) {
 	
 	uow.markAsDeleted(unit, this);
 }
 
-public void persistAdd(Unit unit) {
+	public void persistAdd(Unit unit) {
 	
 	try{
 		setupInsertQuery((TUnit)unit);
@@ -72,7 +72,7 @@ public void persistAdd(Unit unit) {
 }
 
 
-public void persistUpdate(Unit unit) {
+	public void persistUpdate(Unit unit) {
 	
 	try{
 		setupUpdateQuery((TUnit)unit);
@@ -83,7 +83,7 @@ public void persistUpdate(Unit unit) {
 	
 }
 	
-public void persistDelete(Unit unit) {
+	public void persistDelete(Unit unit) {
 	
 	try{
 		delete.setInt(1,  unit.getNumber());
@@ -94,7 +94,7 @@ public void persistDelete(Unit unit) {
 	
 }
 
-public TUnit get(int id) {
+	public TUnit get(int id) {
 	
 	try {
 		 selectByID.setInt(1,  id);
