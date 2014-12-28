@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		String url="jdbc:mysql://localhost/metodyDB";
+		String url="jdbc:mysql://localhost:3306/metodydb";
 		User jnowak = new User();
 		Employee nowak_emp = new Employee();
 		Contact nowak_cont = new Contact();
@@ -45,9 +45,9 @@ public class Main {
 					+ "companyName varchar(30), roomNumber varchar(3), specialization varchar(20))";
 			Statement createTable = connection.createStatement();
 			createTable.executeUpdate(createTableSql);
-			*/
-
-		/*	
+			
+			IRepoArchive archive = new RepoArchive(connection, uow);
+			
 			archive.getUsers().save(jnowak);
 			
 			List<User> usersInDB = archive.getUsers().getAll();
@@ -66,8 +66,8 @@ public class Main {
 				System.out.println(userInDB.getNumber() + " "
 						+ userInDB.getLogin() + " " + userInDB.getPassword());
 						
-		*/
-			
+		
+			*/
 		}catch (SQLException e){
 			e.printStackTrace();
 	
